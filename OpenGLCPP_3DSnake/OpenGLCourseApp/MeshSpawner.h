@@ -1,6 +1,6 @@
 #pragma once
-#include <GL\glew.h>
 
+#include <GL\glew.h>
 #include <vector>
 #include "CommonValues.h"
 #include "Mesh.h"
@@ -9,13 +9,11 @@ class MeshSpawner
 {
 public:
 	MeshSpawner();
-	//void calcCoordsList();
-    float scaleFactorForCubes; //= 0.1f;
+    float scaleFactorForCubes; 
     std::vector<Mesh*> snakeBodyMeshesList;
 	Mesh* cubeToPickUp;
 	Mesh* floorPlane;
 
-	float ForTesting();
     void CalcALLCoordsList();
 	std::vector<planeCoords> CalcCurrentAvailableCoordsList();
 	void CreateSnakeBodyCube(planeCoords coordsForCreatedCube);
@@ -25,15 +23,10 @@ public:
 
 	Mesh* GetPreviousSnakeCube(Mesh* currentSnakeCube);
 
-	
 	~MeshSpawner();
-	//std::vector<planeCoords> getCurrentAvailableLocationsList();
-    
 
 private:
-
 	std::vector<planeCoords> allLocationsList;
-	//std::vector<planeCoords> currentAvailableLocationsList;
 
 	unsigned int cubeIndices[36] =
 	{

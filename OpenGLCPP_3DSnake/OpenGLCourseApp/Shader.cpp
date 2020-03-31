@@ -13,7 +13,6 @@ void Shader::CreateFromFiles(const char* vShader, const char* fShader)
 	compileShaders(vShaderCode.c_str(), fShaderCode.c_str());
 }
 
-
 Shader::~Shader()
 {
 }
@@ -25,14 +24,10 @@ std::string Shader::readShaderCodeFromFile(const char* shaderPath)
 	shaderFile.exceptions(std::ifstream::badbit);
 	try
 	{
-		// Открываем файлы
 		shaderFile.open(shaderPath);
 		std::stringstream shaderStream;
-		// Считываем данные в потоки
 		shaderStream << shaderFile.rdbuf();
-		// Закрываем файлы
 		shaderFile.close();
-		// Преобразовываем потоки в массив GLchar
 		code = shaderStream.str();
 	}
 	catch (std::ifstream::failure e)
@@ -74,8 +69,6 @@ void Shader::addShader(GLuint theProgram, const char* shaderCode, GLenum shaderT
 void Shader::compileShaders(const char* vShaderCode, const char* fShaderCode)
 {
 	shader = glCreateProgram();
-
-	//std::cout << shader << std::endl;
 
 	if (!shader) {
 		std::cerr << "Error creating shader program\n";

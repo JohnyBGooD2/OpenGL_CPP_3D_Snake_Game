@@ -1,5 +1,4 @@
 #include "Window.h"
-//#include "SDL.h"
 
 Window::Window()
 {
@@ -51,16 +50,12 @@ int Window::initialize()
 	}
 
 	// OpenGL viewport dimensions
-	SDL_GetWindowSize(mainWindow, &bufferWidth, &bufferHeight); // https://metanit.com/cpp/tutorial/3.3.php     
-                                                                //https://metanit.com/cpp/tutorial/4.6.php
+	SDL_GetWindowSize(mainWindow, &bufferWidth, &bufferHeight);      
 
 	// Set context for GLEW to use
 	SDL_GL_CreateContext(mainWindow);
-
-    SDL_SetWindowGrab(mainWindow, SDL_TRUE); // Lock cursor to window !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-   
+    SDL_SetWindowGrab(mainWindow, SDL_TRUE); // Lock cursor to window 
 	SDL_ShowCursor(SDL_DISABLE);
-	//SDL_CaptureMouse(SDL_TRUE); // Check outside the window
 
 	glewExperimental = GLU_TRUE;
 	SDL_GL_SetSwapInterval(0); // This removes camera lag
@@ -96,20 +91,12 @@ GLfloat Window::getYChange()
 	return theChange;
 }
 
-//Window::MovementDirection Window::getMovementDirectionFromKeyboard()
-//{
-//	return MovementDirection();
-//}
-
 void Window::getMovementDirectionFromKeyboard()
 {
-	//return x < a ? a : (x > b ? b : x);
-
 	if (keys[153]) { (MoveDirection == left || MoveDirection == right) ? MoveDirection = forward : MoveDirection; }
 	else if (keys[152])	{ (MoveDirection == left || MoveDirection == right) ? MoveDirection = backwards : MoveDirection;}
 	else if (keys[151])	{ (MoveDirection == forward || MoveDirection == backwards) ? MoveDirection = left : MoveDirection;}
 	else if (keys[150]) { (MoveDirection == forward || MoveDirection == backwards) ? MoveDirection = right : MoveDirection; }
-	
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ SDL events~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
@@ -137,13 +124,12 @@ bool Window::getShouldClose()
 			else
 			{
 
-				SDL_GetMouseState(&xPos, &yPos); // if pointers are in the func argument, then pass refs to normal vars there
-				//printf("%.5f, %.5\n", (float)xPos, (float)yPos);
-				yChange = height / 2 - yPos;   //event.motion.y;
-				xChange = xPos - width / 2;//event.motion.x - width/2;
+				SDL_GetMouseState(&xPos, &yPos); 
+				yChange = height / 2 - yPos;  
+				xChange = xPos - width / 2;
 			}
 
-			SDL_WarpMouseInWindow(mainWindow, width / 2, height / 2); // Set Mouse Position to ZERO!!!!!!!!!!!!
+			SDL_WarpMouseInWindow(mainWindow, width / 2, height / 2); // Set Mouse Position to ZERO
 
 			return false;
 		}
@@ -151,11 +137,7 @@ bool Window::getShouldClose()
 		{
 			switch (event.type)
 			{
-
 			case SDL_KEYDOWN:
-
-				// https://wiki.libsdl.org/SDLKeycodeLookup
-
 				if (event.key.keysym.sym == SDLK_ESCAPE)
 				{
 					SDL_DestroyWindow(mainWindow);
@@ -181,36 +163,13 @@ bool Window::getShouldClose()
 					keys[event.key.keysym.sym] = 0;
 				}
 				break;
-
-			/*case SDL_MOUSEMOTION:
-
-				if (!mouseFirstMoved)
-				{
-					SDL_WarpMouseInWindow(mainWindow, width / 2, height / 2);
-				    mouseFirstMoved = true;
-				}
-				else
-				{
-
-				    SDL_GetMouseState(&xPos, &yPos); // if pointers are in the func argument, then pass refs to normal vars there
-					//printf("%.5f, %.5\n", (float)xPos, (float)yPos);
-					yChange = height / 2 - yPos;   //event.motion.y;
-					xChange = xPos - width/2 ;//event.motion.x - width/2;
-				}
-				
-
-				SDL_WarpMouseInWindow(mainWindow, width / 2, height / 2); // Set Mouse Position to ZERO!!!!!!!!!!!!
-
-				break; */
 			}
 			getMovementDirectionFromKeyboard();
 
 			return false;
 		}
 	}
-
 }
-
 
 Window::~Window()
 {

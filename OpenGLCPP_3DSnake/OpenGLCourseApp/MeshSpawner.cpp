@@ -12,30 +12,19 @@ MeshSpawner::MeshSpawner()
 	CalcALLCoordsList();
 }
 
-void MeshSpawner::CalcALLCoordsList()//(std::vector<planeCoords> *locList)
+// Calculate all coordinates we can put cubes
+void MeshSpawner::CalcALLCoordsList()
 {
 	planeCoords coordsForPickUp;
-
-	//roundf(var * 10) / 10     round to 1 decimal place
 
 	int numberOfSteps = (int)(1 / scaleFactorForCubes);
 	float tempX = 1.0f - scaleFactorForCubes;
 	
-
 	for (int i = 0; i <= numberOfSteps - 1; i += 1)
 	{
-		
-		//for (float j = roundf(-(1 - scaleFactorForCubes) * 10) / 10; j <= roundf((1 - scaleFactorForCubes) * 10) / 10; j += scaleFactorForCubes)
 		float tempY = 1.0f - scaleFactorForCubes;
 		for (int j = 0; j <= numberOfSteps - 1; j += 1)
 		{
-			
-			
-
-			//printf("%.001f  %.001f\n", scaleFactorForCubes, tempY);
-
-			//std::cout << tempX << "  " << tempY << std::endl;
-
 			coordsForPickUp.xCord = tempX;
 			coordsForPickUp.zCord = tempY;
 
@@ -45,22 +34,14 @@ void MeshSpawner::CalcALLCoordsList()//(std::vector<planeCoords> *locList)
 		}
 		tempX -= (2*scaleFactorForCubes);
 	}
-
 }
 
-
+// Calculate all places not taken by snake body cubes
 std::vector<planeCoords> MeshSpawner::CalcCurrentAvailableCoordsList()
 {
 	planeCoords coordsToRemove;
-	//calcALLCoordsList();
-
 	std::vector<int> indexesToRemove;
-
 	std::vector<planeCoords> currentAvailableLocationsList;
-
-	//std::cout << allLocationsList.size() << std::endl;
-
-	//currentAvailableLocationsList = allLocationsList;
 
 	for (Mesh* iter : snakeBodyMeshesList)
 	{
@@ -80,14 +61,7 @@ std::vector<planeCoords> MeshSpawner::CalcCurrentAvailableCoordsList()
 			}
 			index++;
 		}
-
-		//std::cout << locList[8] << std::endl;
 	}
-
-	/*for (int indexToRemove : indexesToRemove)
-	{
-		currentAvailableLocationsList.erase(currentAvailableLocationsList.begin() + indexToRemove);
-	}*/
 
 	int indexToCheck = 0;
 	for (planeCoords it : allLocationsList)
@@ -111,7 +85,8 @@ std::vector<planeCoords> MeshSpawner::CalcCurrentAvailableCoordsList()
 	return currentAvailableLocationsList;
 }
 
-Mesh * MeshSpawner::GetPreviousSnakeCube(Mesh* currentSnakeCube)
+// Find cube to follow
+Mesh* MeshSpawner::GetPreviousSnakeCube(Mesh* currentSnakeCube)
 {
 	std::vector<Mesh*>::iterator it = std::find(snakeBodyMeshesList.begin(), snakeBodyMeshesList.end(), currentSnakeCube);
 	return snakeBodyMeshesList[std::distance(snakeBodyMeshesList.begin(), it) - 1];
@@ -122,18 +97,9 @@ void MeshSpawner::CreateSnakeBodyCube(planeCoords coordsForCreatedCube)
 	Mesh* newBodyCube = new Mesh();
 	newBodyCube->CreateMesh(cubeVertices, cubeIndices, 40, 36);
 	snakeBodyMeshesList.push_back(newBodyCube);
-	newBodyCube->Y_Offset = 0.0f; //-0.9f;//randomRangeFloat(randomGenerator);   // Because scaled with 0.1 --> set offset 0.9 down
-	//obj1->posMoveSpeed = 0.02*randomRangeFloat(randomGenerator);
-	//if (snakeBodyMeshesList.size() == 1)
-	//{
-	//	newBodyCube->X_Offset = -1 + scaleFactorForCubes;//-0.9f;
-	//	newBodyCube->Z_Offset = 1 - scaleFactorForCubes;//0.9f;
-	//}
-	//else
-	//{
-		newBodyCube->X_Offset = coordsForCreatedCube.xCord; //GetPreviousSnakeCube(newBodyCube)->X_Offset;
-		newBodyCube->Z_Offset = coordsForCreatedCube.zCord; //GetPreviousSnakeCube(newBodyCube)->Z_Offset;
-	//}
+	newBodyCube->Y_Offset = 0.0f; 
+	newBodyCube->X_Offset = coordsForCreatedCube.xCord; 
+	newBodyCube->Z_Offset = coordsForCreatedCube.zCord; 
 }
 
 void MeshSpawner::CreateCubeToPickUp()
@@ -143,6 +109,7 @@ void MeshSpawner::CreateCubeToPickUp()
 	SetNewLocationForPickUpCube();
 }
 
+// Set new coordinates to move green cube to new location
 void MeshSpawner::SetNewLocationForPickUpCube()
 {
 	if (cubeToPickUp)
@@ -167,16 +134,7 @@ void MeshSpawner::CreateFloorPlane()
 {
 	floorPlane = new Mesh();
 	floorPlane->CreateMesh(floorVertices, floorIndices, 20, 6);
-	floorPlane->Y_Offset = 1 - scaleFactorForCubes; // such offset because scale of cubes is 0.1
-}
-
-float MeshSpawner::ForTesting()
-{
-	//calcCoordsList();
-	//calcALLCoordsList();
-	//calcCurrentAvailableCoordsList();
-	return CalcCurrentAvailableCoordsList().size(); //allLocationsList.size(); // //   //locationsList[28].xCord
-
+	floorPlane->Y_Offset = 1 - scaleFactorForCubes; 
 }
 
 MeshSpawner::~MeshSpawner()

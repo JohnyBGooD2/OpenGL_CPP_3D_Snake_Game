@@ -1,6 +1,5 @@
 #include "Camera.h"
 
-
 Camera::Camera() {}
 
 Camera::Camera(glm::vec3 startPosition, glm::vec3 startUp, GLfloat startYaw, GLfloat startPitch, GLfloat startMoveSpeed, GLfloat startTurnSpeed)
@@ -15,14 +14,12 @@ Camera::Camera(glm::vec3 startPosition, glm::vec3 startUp, GLfloat startYaw, GLf
 	turnSpeed = startTurnSpeed;
 
 	update();
-
 }
 
-// SDL keys reference https://wiki.libsdl.org/SDLKeycodeLookup , https://wiki.libsdl.org/SDL_Keycode
-
+// Handle input keys
 void Camera::keyControl(bool* keys, GLfloat deltaTime)
 {
-	GLfloat velocity = moveSpeed * deltaTime; //moveSpeed * deltaTime;
+	GLfloat velocity = moveSpeed * deltaTime; 
 
 	if (keys[SDLK_w])
 	{
@@ -47,11 +44,9 @@ void Camera::keyControl(bool* keys, GLfloat deltaTime)
 	if (keys[SDLK_SPACE])
 	{
 		position += worldUp * velocity;
-	}
-	              
-	// 297:LALT   
+	}              
 
-	if (keys[297]) // Left alt code from first link minus 1073742050 , see Window.cpp for more
+	if (keys[297]) 
 	{
 		position -= worldUp * velocity;
 	}
@@ -78,13 +73,10 @@ void Camera::mouseControl(GLfloat xChange, GLfloat yChange)
 	update();
 }
 
-
 glm::mat4 Camera::calculateViewMatrix()
 {
 	return glm::lookAt(position, position + front, up);
 }
-
-
 
 void Camera::update()
 {
@@ -97,7 +89,6 @@ void Camera::update()
 	right = glm::normalize(glm::cross(front, worldUp));
 	up = glm::normalize(glm::cross(right, front));
 }
-
 
 Camera::~Camera()
 {

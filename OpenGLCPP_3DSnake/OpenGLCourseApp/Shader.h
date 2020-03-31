@@ -20,7 +20,6 @@ public:
 
 	GLuint GetShaderProgram() { return this->shader; };
 
-
 	~Shader();
 private:
 	GLuint shader, uniformModel, uniformProjection, uniformView, uniformAmbientIntensity, uniformAmbientColour,

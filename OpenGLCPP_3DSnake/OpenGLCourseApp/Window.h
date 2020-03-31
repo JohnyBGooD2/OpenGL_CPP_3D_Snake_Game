@@ -1,14 +1,7 @@
 #include <iostream>
-
 #include <GL/glew.h>
-//#include <GLFW/glfw3.h>
-
 #include <SDL.h>
-
-//#include "MeshSpawner.h"
-#undef main   // https://stackoverflow.com/questions/6847360/error-lnk2019-unresolved-external-symbol-main-referenced-in-function-tmainc
-//#include <SDL_opengl.h>
-
+#undef main  
 
 #pragma once
 class Window
@@ -25,11 +18,8 @@ public:
 
     enum MovementDirection {forward, backwards, left, right} MoveDirection;
 	
-
-
 	bool* getKeys() { return keys; } // pointer because array as output
 	
-
 	GLfloat getXChange(); 
 	GLfloat getYChange();
 
@@ -50,6 +40,5 @@ private:
 
 	bool mouseFirstMoved;
 
-	void getMovementDirectionFromKeyboard(); // { return MoveDirection; };
-
+	void getMovementDirectionFromKeyboard(); 
 };

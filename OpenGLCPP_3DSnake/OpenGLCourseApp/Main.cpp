@@ -171,10 +171,7 @@ int main()
 				{
 					current->X_Offset = meshSpawner.GetPreviousSnakeCube(current)->X_Offset;
 					current->Z_Offset = meshSpawner.GetPreviousSnakeCube(current)->Z_Offset;
-					
 				}
-				/* Get index of element from iterator
-				int index = std::distance(vecOfNums.begin(), it);*/
 			}
 			delayCounter = 0.0f;
 		}
@@ -243,6 +240,5 @@ int main()
 		glUseProgram(0);
 		mainWindow.swapBuffers();
 	}
-
 	return 0;
 }
