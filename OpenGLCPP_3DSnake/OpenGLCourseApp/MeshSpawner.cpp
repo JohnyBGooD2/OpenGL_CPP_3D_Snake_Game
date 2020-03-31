@@ -8,7 +8,7 @@ std::mt19937 randomGenerator(randDevice());
 
 MeshSpawner::MeshSpawner()
 {
-	scaleFactorForCubes = 0.2f; // Scale of snake body cubes max = 0.2
+	scaleFactorForCubes = 0.1f; // Scale of snake body cubes max = 0.2
 	CalcALLCoordsList();
 }
 
