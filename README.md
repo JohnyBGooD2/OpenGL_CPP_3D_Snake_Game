@@ -2,7 +2,8 @@ OpenGL C++ 3D Snake Game.
 
 Created with OpenGL and SDL libraries from scratch. 
 
-Controls: 
+
+CONTROLS: 
 
 arrows - control snake
 
