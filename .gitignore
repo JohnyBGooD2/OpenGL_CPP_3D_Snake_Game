@@ -1,32 +1,9 @@
-# Prerequisites
-*.d
+# Visual Studio Folder
+OpenGLCPP_3DSnake/.vs/*
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+# Debug Folder
+OpenGLCPP_3DSnake/Debug/*
 
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
+# Debug and Backup folders
+OpenGLCPP_3DSnake/OpenGLCourseApp/Debug/*
+OpenGLCPP_3DSnake/OpenGLCourseApp/Backup/*
