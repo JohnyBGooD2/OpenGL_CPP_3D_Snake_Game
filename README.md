@@ -2,6 +2,8 @@ OpenGL C++ 3D Snake Game.
 
 Created with OpenGL and SDL libraries from scratch. 
 
+Included solution for Visual Studio 2017. Other IDEs need some reassigning. 
+
 
 CONTROLS: 
 
