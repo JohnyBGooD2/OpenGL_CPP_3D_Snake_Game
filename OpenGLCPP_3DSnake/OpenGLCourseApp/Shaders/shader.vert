@@ -23,6 +23,5 @@ void main()
 	    vCol = vec4(0.2f, clamp(pos.y, 0.2f, 1.0f), 0.2f, 1.0f);
 	}
 	
-	
 	TexCoord = tex;
 }
